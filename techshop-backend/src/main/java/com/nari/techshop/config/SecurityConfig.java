@@ -31,12 +31,15 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/api/categories/**",
                         "/api/products/**"
-                ).hasRole("ADMIN")
+                ).hasAuthority("ROLE_ADMIN")
 
                 .requestMatchers(
                         "/api/cart/**",
                         "/api/orders/**"
-                ).hasAnyRole("USER", "ADMIN")
+                ).hasAnyAuthority(
+                        "ROLE_USER",
+                        "ROLE_ADMIN"
+                )
 
                 .anyRequest().authenticated()
             )
