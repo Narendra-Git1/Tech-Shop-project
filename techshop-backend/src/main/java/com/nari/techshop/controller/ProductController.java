@@ -149,5 +149,52 @@ public class ProductController {
 
         return "Product Deleted Successfully";
     }
+    
+    @GetMapping("/search")
+    public List<ProductResponseDTO> searchProducts(
+            @RequestParam String keyword) {
+
+        return productService.searchProducts(keyword)
+                .stream()
+                .map(product ->
+                        new ProductResponseDTO(
+                                product.getId(),
+                                product.getName(),
+                                product.getDescription(),
+                                product.getPrice(),
+                                product.getStockQuantity(),
+                                product.getImageUrl(),
+
+                                product.getCategory() != null
+                                        ? product.getCategory().getName()
+                                        : null
+                        )
+                )
+                .collect(Collectors.toList());
+    }
+    
+    @GetMapping("/filter")
+    public List<ProductResponseDTO> filterProductsByCategory(
+            @RequestParam Long categoryId) {
+
+        return productService
+                .filterProductsByCategory(categoryId)
+                .stream()
+                .map(product ->
+                        new ProductResponseDTO(
+                                product.getId(),
+                                product.getName(),
+                                product.getDescription(),
+                                product.getPrice(),
+                                product.getStockQuantity(),
+                                product.getImageUrl(),
+
+                                product.getCategory() != null
+                                        ? product.getCategory().getName()
+                                        : null
+                        )
+                )
+                .collect(Collectors.toList());
+    }
 
 }

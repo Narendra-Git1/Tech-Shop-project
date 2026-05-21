@@ -19,7 +19,16 @@ public class ProductServiceImpl implements ProductService {
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
+    
+    @Override
+    public List<Product> searchProducts(
+            String keyword) {
 
+        return productRepository
+                .findByNameContainingIgnoreCase(
+                        keyword
+                );
+    }
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -54,6 +63,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
+    }
+    
+    @Override
+    public List<Product> filterProductsByCategory(
+            Long categoryId) {
+
+        return productRepository
+                .findByCategoryId(categoryId);
     }
 
 }

@@ -7,6 +7,11 @@ import com.nari.techshop.entity.Product;
 public interface ProductService {
 
     Product createProduct(Product product);
+    List<Product> searchProducts(String keyword);
+    
+    List<Product> filterProductsByCategory(
+            Long categoryId
+    );
 
     List<Product> getAllProducts();
 
