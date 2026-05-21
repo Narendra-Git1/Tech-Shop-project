@@ -28,6 +28,16 @@ public class SecurityConfig {
                         "/api/auth/**"
                 ).permitAll()
 
+                .requestMatchers(
+                        "/api/categories/**",
+                        "/api/products/**"
+                ).hasRole("ADMIN")
+
+                .requestMatchers(
+                        "/api/cart/**",
+                        "/api/orders/**"
+                ).hasAnyRole("USER", "ADMIN")
+
                 .anyRequest().authenticated()
             )
 
