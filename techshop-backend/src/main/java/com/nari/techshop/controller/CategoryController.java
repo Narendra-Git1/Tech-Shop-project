@@ -11,6 +11,8 @@ import com.nari.techshop.dto.CategoryResponseDTO;
 import com.nari.techshop.entity.Category;
 import com.nari.techshop.service.CategoryService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
@@ -20,7 +22,7 @@ public class CategoryController {
 
     @PostMapping
     public CategoryResponseDTO createCategory(
-            @RequestBody CategoryRequestDTO dto) {
+            @Valid @RequestBody CategoryRequestDTO dto) {
 
         Category category = new Category();
 
@@ -65,7 +67,7 @@ public class CategoryController {
     @PutMapping("/{id}")
     public CategoryResponseDTO updateCategory(
             @PathVariable Long id,
-            @RequestBody CategoryRequestDTO dto) {
+            @Valid @RequestBody CategoryRequestDTO dto) {
 
         Category category = new Category();
 
